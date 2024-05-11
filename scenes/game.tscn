@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://2yw25k18f7s5"]
+
+[ext_resource type="PackedScene" uid="uid://b68ttw1sbnbc4" path="res://scenes/player.tscn" id="1_pgmlp"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_vtppn"]
+
+[node name="game" type="Node2D"]
+
+[node name="player" parent="." instance=ExtResource("1_pgmlp")]
+position = Vector2(105, -34)
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("WorldBoundaryShape2D_vtppn")
+disabled = true
