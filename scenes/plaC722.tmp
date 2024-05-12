@@ -1,26 +1,9 @@
-[gd_scene load_steps=28 format=3 uid="uid://b68ttw1sbnbc4"]
+[gd_scene load_steps=23 format=3 uid="uid://b68ttw1sbnbc4"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_d1ah2"]
 [ext_resource type="Texture2D" uid="uid://cicuxqvjmxws" path="res://assets/sprites/player/Idle-Sheet.png" id="1_mwmkk"]
 [ext_resource type="Texture2D" uid="uid://bnx101wqf6jti" path="res://assets/sprites/player/Run-Sheet.png" id="2_k7nog"]
-[ext_resource type="Texture2D" uid="uid://ljfesm4q65gw" path="res://assets/sprites/player/Attack-01-Sheet.png" id="2_vyxrm"]
 [ext_resource type="Texture2D" uid="uid://bg3ajb2i06fvv" path="res://assets/sprites/player/Jump-Start-Sheet.png" id="3_f6w0y"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_u4sd3"]
-atlas = ExtResource("2_vyxrm")
-region = Rect2(384, 0, 96, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_2dnjw"]
-atlas = ExtResource("2_vyxrm")
-region = Rect2(480, 0, 96, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qfskn"]
-atlas = ExtResource("2_vyxrm")
-region = Rect2(576, 0, 96, 80)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6hua6"]
-atlas = ExtResource("2_vyxrm")
-region = Rect2(672, 0, 96, 80)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dpw6b"]
 atlas = ExtResource("1_mwmkk")
@@ -88,23 +71,6 @@ region = Rect2(560, 0, 80, 80)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_0xvs2"]
 animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_u4sd3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_2dnjw")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_qfskn")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6hua6")
-}],
-"loop": true,
-"name": &"Attack1",
-"speed": 5.0
-}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dpw6b")
@@ -177,12 +143,11 @@ z_index = 5
 script = ExtResource("1_d1ah2")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-light_mask = 2
 sprite_frames = SubResource("SpriteFrames_0xvs2")
-animation = &"Attack1"
+animation = &"Jump"
 autoplay = "Idle"
-frame = 1
-frame_progress = 0.084027
+frame = 3
+frame_progress = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ay5ke")
