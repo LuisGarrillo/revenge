@@ -1,10 +1,11 @@
-[gd_scene load_steps=28 format=3 uid="uid://b68ttw1sbnbc4"]
+[gd_scene load_steps=29 format=3 uid="uid://b68ttw1sbnbc4"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_d1ah2"]
 [ext_resource type="Texture2D" uid="uid://cicuxqvjmxws" path="res://assets/sprites/player/Idle-Sheet.png" id="1_mwmkk"]
 [ext_resource type="Texture2D" uid="uid://bnx101wqf6jti" path="res://assets/sprites/player/Run-Sheet.png" id="2_k7nog"]
 [ext_resource type="Texture2D" uid="uid://ljfesm4q65gw" path="res://assets/sprites/player/Attack-01-Sheet.png" id="2_vyxrm"]
 [ext_resource type="Texture2D" uid="uid://bg3ajb2i06fvv" path="res://assets/sprites/player/Jump-Start-Sheet.png" id="3_f6w0y"]
+[ext_resource type="PackedScene" uid="uid://bc6t7xplt85qj" path="res://scenes/utils/player_hit_box.tscn" id="6_mhtwv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_u4sd3"]
 atlas = ExtResource("2_vyxrm")
@@ -182,7 +183,7 @@ sprite_frames = SubResource("SpriteFrames_0xvs2")
 animation = &"Attack1"
 autoplay = "Idle"
 frame = 1
-frame_progress = 0.084027
+frame_progress = 0.828292
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ay5ke")
@@ -192,8 +193,12 @@ zoom = Vector2(4, 4)
 
 [node name="Timers" type="Node" parent="."]
 
-[node name="JumpTimer" type="Timer" parent="Timers"]
-wait_time = 0.03
+[node name="Node" type="Node" parent="."]
+
+[node name="Attack1HitBox" parent="Node" instance=ExtResource("6_mhtwv")]
+position = Vector2(-10, 31)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Node/Attack1HitBox"]
+polygon = PackedVector2Array(23, -60, 46, -40, 44, -9, 14, 4, -6, 4, -29, -11, -7, -32, 15, -17, 30, -33)
 
 [connection signal="frame_changed" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_frame_changed"]
-[connection signal="timeout" from="Timers/JumpTimer" to="." method="_on_jump_timer_timeout"]

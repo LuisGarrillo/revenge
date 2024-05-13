@@ -4,7 +4,7 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 @onready var animated_sprite = $AnimatedSprite2D
-@onready var jump_timer = $Timers/JumpTimer
+@onready var attack_1_hit_box = $Node/Attack1HitBox
 
 var attacking = false
 var attack_counter = 0
@@ -15,8 +15,11 @@ var jump_countdown = 0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+func _ready():
+	attack_1_hit_box.set_inactive()
 
 func _physics_process(delta):
+	print(attack_1_hit_box.is_monitoring())
 	# Add the gravity.
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -59,16 +62,23 @@ func _physics_process(delta):
 func jump():
 	jump_countdown += 1
 	if jump_countdown == 10:
-		jumping = false
-		jump_countdown = 0
 		velocity.y = JUMP_VELOCITY
+	elif jump_countdown > 10:
+		if is_on_floor():
+			jump_countdown = 0
+			jumping = false
+			
 		
 func attack():
 	attack_counter += 1
 	if attack_counter == 10:
+		attack_1_hit_box.set_active()
+		attack_1_hit_box.set_position(position)
 		print("attack")
 	if attack_counter == 40:
+		attack_1_hit_box.set_inactive()
 		attack_counter = 0
 		attacking = false
+		
 	
 	
